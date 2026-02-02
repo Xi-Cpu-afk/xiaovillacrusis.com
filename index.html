@@ -6,44 +6,75 @@
     <title>Mac Xiaobin Villacrusis - Software Engineer</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 </head>
 <body class="p-4 md:p-8 max-w-7xl mx-auto">
 
-    <header class="flex flex-col md:flex-row items-start md:items-center justify-between mb-8 gap-6">
-        <div class="flex items-center gap-6">
-            <div class="relative">
-                <img src="PHOTO KO DITO.jpg" alt="Profile" class="w-24 h-24 rounded-2xl object-cover grayscale opacity-80 hover:grayscale-0 transition duration-500">
-            </div>
-            <div>
-                <div class="flex items-center gap-2">
-                    <h1 class="text-3xl font-bold">Mac Xiaobin Villarusis</h1>
-                    <i class="fas fa-check-circle text-blue-500 text-lg"></i>
-                </div>
-                <p class="text-gray-400 text-sm mt-1"><i class="fas fa-map-marker-alt mr-1"></i> Metro Manila, Philippines</p>
-                <p class="text-white text-lg mt-1 font-medium">Software Engineer</p>
-            </div>
-        </div>
+   <header class="mb-12">
+    <div class="flex flex-row items-center gap-8">
+        
+        <div id="profile-container" 
+     onclick="toggleThirdPhoto()" 
+     onmouseleave="this.querySelector('#photo-3').style.opacity = '0'"
+     class="relative group w-44 h-44 flex-shrink-0 overflow-hidden rounded-2xl border border-zinc-800 shadow-2xl cursor-pointer">
+    
+    <img src="D:\CV WEB UPDATED\src\components\profile1.png" 
+         id="photo-1"
+         data-dark-src="D:\CV WEB UPDATED\src\components\profile1.png"
+         data-light-src="D:\CV WEB UPDATED\src\components\profile1 lightmode.png"
+         alt="Profile" 
+         class="profile-img absolute inset-0 w-full h-full object-cover transition-all duration-500 group-hover:opacity-0 group-hover:scale-110">
+    
+    <img src="D:\CV WEB UPDATED\src\components\profile2png.png" 
+         id="photo-2"
+         data-dark-src="D:\CV WEB UPDATED\src\components\profile2png.png"
+         data-light-src="D:\CV WEB UPDATED\src\components\profile2 lightmode.png"
+         alt="Profile Hover" 
+         class="profile-img absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-500 group-hover:opacity-100 scale-105 group-hover:scale-100">
 
-        <div class="flex flex-col items-end gap-3">
+    <img src="D:\CV WEB UPDATED\src\components\3rd photo.png" 
+         id="photo-3"
+         data-dark-src="D:\CV WEB UPDATED\src\components\profile3 darkmode.png"
+         data-light-src="D:\CV WEB UPDATED\src\components\profile3 lightmode.png"
+         alt="Profile Clicked" 
+         class="profile-img absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-500 z-20 pointer-events-none">
+</div>
+        <div class="flex flex-col gap-1">
             <div class="flex items-center gap-2">
-                 <div class="bg-gray-700 w-12 h-6 rounded-full relative cursor-pointer flex items-center px-1 justify-end">
-                    <i class="fas fa-moon text-white text-xs z-10 mr-1"></i>
-                    <div class="w-4 h-4 bg-white rounded-full absolute left-1"></div>
-                </div>
+                <h1 class="text-4xl font-bold tracking-tight text-white">Mac Xiaobin Villarusis</h1>
+                <svg class="w-7 h-7 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.64.3 1.241.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"></path>
+                </svg>
             </div>
             
-    </header>
+            <p class="text-zinc-400 flex items-center gap-1.5 text-lg">
+                <i class="fas fa-map-marker-alt text-sm"></i> 
+                Metro Manila, Philippines
+            </p>
+            
+            <p class="text-zinc-300 text-xl font-medium mt-2">
+                Software Engineer
+            </p>
+        </div>
+
+        <button id="theme-toggle" aria-label="Toggle color theme" class="ml-auto p-0 rounded-full bg-transparent border-0" aria-pressed="false">
+            <span class="switch" aria-hidden="true">
+                <span class="switch-knob">
+                    <i id="theme-toggle-icon" class="fas fa-moon"></i>
+                </span>
+            </span>
+        </button>
+    </div>
+            
+    </header> 
 
     <div class="flex flex-wrap gap-3 mb-6">
-        <button class="cta-btn bg-white text-black hover:bg-gray-200">
+        <button id="open-schedule-modal" class="cta-btn bg-white text-black hover:bg-gray-200" type="button" aria-haspopup="dialog" aria-controls="schedule-modal">
             <i class="far fa-calendar"></i> Schedule a Call <i class="fas fa-chevron-right text-xs"></i>
         </button>
-        <button class="cta-btn text-gray-300">
+        <button id="open-email-modal" class="cta-btn text-gray-300" type="button" aria-haspopup="dialog" aria-controls="email-modal">
             <i class="far fa-envelope"></i> Send Email
-        </button>
-        <button class="cta-btn text-gray-300 grow md:grow-0 justify-between">
-            <span class="flex items-center gap-2"><i class="fas fa-users"></i> Visit my community and join the discussion here!</span>
-            <i class="fas fa-chevron-right"></i>
         </button>
     </div>
 
@@ -57,13 +88,13 @@
                     <h2 class="font-bold text-lg">About</h2>
                 </div>
                 <p class="text-gray-400 text-sm leading-relaxed mb-4">
-                    I'm a full-stack software engineer specializing in developing solutions with HTML, CSS, JavaScript, Python, and PHP. I work on projects including building modern web applications, mobile apps, search engine optimization, digital marketing.
+                    I'm a full-stack Software Engineer specializing in developing solutions with JavaScript, Python, PHP, and Laravel I work on projects including building modern web applications, mobile apps, search engine optimization, digital marketing with minimalism and functionality.
                 </p>
                 <p class="text-gray-400 text-sm leading-relaxed mb-4">
                     I Graduated from University of Batangas with a degree in Bachelor of Science in Computer Engineering
                 </p>
                 <p class="text-gray-400 text-sm leading-relaxed">
-                   I specialized Software Engineering and Advance Machine Learning. My work now includes developing AI-powered solutions, creating applications with generative AI to optimize development workflows and deliver cutting-edge technology.
+                   I specialized Software Engineering, Machine Learning, and Security. My work includes developing AI-powered solutions, creating applications with generative AI to optimize development workflows and to deliver cutting-edge technology.
                 </p>
             </div>
 
@@ -81,7 +112,6 @@
                 <div class="mb-4">
                     <h3 class="text-sm font-semibold mb-2">Frontend</h3>
                     <div>
-                        <span class="badge">HTML</span>
                         <span class="badge">JavaScript</span>
                         <span class="badge">TypeScript</span>
                         <span class="badge">React</span>
@@ -100,6 +130,10 @@
                         <span class="badge">Laravel</span>
                         <span class="badge">PostgreSQL</span>
                         <span class="badge">MongoDB</span>
+                        <span class="badge">MySQL</span>
+                        <span class="badge">Firebase</span>
+                        <span class="badge">Django</span>
+                        <span class="badge">.NetFramework</span>
                     </div>
                 </div>
 
@@ -110,15 +144,9 @@
                         <span class="badge">Docker</span>
                         <span class="badge">Kubernetes</span>
                         <span class="badge">GitHub Actions</span>
-                    </div>
-                </div>
-                <div>
-                    <h3 class="text-sm font-semibold mb-2">DevOps & Cloud</h3>
-                    <div>
-                        <span class="badge">AWS</span>
-                        <span class="badge">Docker</span>
-                        <span class="badge">Kubernetes</span>
-                        <span class="badge">GitHub Actions</span>
+                        <span class="badge">CI/CD</span>
+                        <span class="badge">Nginx</span>
+                        <span class="badge">Linux</span>
                     </div>
                 </div><div>
                     <h3 class="text-sm font-semibold mb-2">Developer Tools</h3>
@@ -128,6 +156,7 @@
                         <span class="badge">Git</span>
                         <span class="badge">GitLab</span>
                         <span class="badge">Discord</span>
+                       
                     </div>
                 </div>
             </div>
@@ -140,11 +169,19 @@
                             <h2 class="font-bold text-lg">Beyond Coding</h2>
                         </div>
                         <p class="text-gray-400 text-sm leading-relaxed mb-4">
-                            When not writing code, I focus on learning about emerging technologies, minimalism, and startup culture.
+                            When not writing code, I focus on learning about emerging technologies, minimalism, and personal productivity.
                         </p>
-                        <p class="text-gray-400 text-sm leading-relaxed">
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
                             I share my knowledge through online bootcamps and community building.
                         </p>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            I take free Certifications Online when not coding, enhancing my knowledge and skills
+                        </p>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            I listen to Podcasts about Technology, Software Development, and Emerging Tech.
+                        </p>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            I jog & walk every Monday to Friday, in weekends i play Volleyball, I do this for my Metal Health and Physical Health.
                     </div>
                 </div>
 
@@ -154,7 +191,7 @@
                             <i class="fas fa-th-large text-gray-400"></i>
                             <h2 class="font-bold text-lg">Recent Projects</h2>
                         </div>
-                        <span class="text-xs text-gray-500 cursor-pointer">View All <i class="fas fa-chevron-right"></i></span>
+                        <span class="text-xs text-gray-500 cursor-pointer"><i class="fas fa-chevron-right"></i></span>
                     </div>
 
                    <div class="grid grid-cols-1 gap-3">
@@ -206,7 +243,7 @@
             <h2 class="font-bold text-lg">Recent Certifications</h2>
         </div>
         <a href="certifications.html" class="text-xs text-gray-500 hover:text-white transition-colors cursor-pointer">
-            View All → <i class="fas fa-chevron-right ml-1"></i>
+            View All <i class="fas fa-chevron-right ml-1"></i>
         </a>
     </div>
     
@@ -300,11 +337,11 @@
                     <h2 class="font-bold text-lg">Recommendations</h2>
                 </div>
                 <p class="text-gray-400 text-sm italic mb-4 leading-relaxed">
-                    "Was an intern at PocketDevs and sir Xiao was our trainer to the different technologies we use in the company such as Laravel, Bootstrap, etc. With his guidance, I was equipped with some of the current trends and insights in the tech industry..."
+                    "Me and Xiao are bestfriends during collge he was our tech guy to coding and right now he's the one teaching me to be a better developer, he introduced to me the different technologies we use in the company such as Laravel, Bootstrap, etc. With his guidance, I was equipped with some of the current trends and insights in the tech industry..."
                 </p>
                 <div>
                     <h4 class="font-bold text-sm">Aironn Jayfe Datinguinoo</h4>
-                    <p class="text-xs text-gray-500">Software Engineer, YNS</p>
+                    <p class="text-xs text-gray-500">Full-Stack Web Developer, BPI</p>
                 </div>
                 <div class="flex gap-1 mt-4">
                     <div class="w-1.5 h-1.5 rounded-full bg-white"></div>
@@ -321,57 +358,75 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
         
         <div class="card p-4 flex flex-col justify-between">
-            <div class="flex items-center gap-2 mb-2 text-gray-400 text-sm">
-                <i class="fas fa-users"></i> A member of
-            </div>
-            <div class="space-y-2">
-                <div class="border border-gray-700 rounded p-2 flex justify-between items-center text-xs">
-                    <span>Computer Engineering Student's Society</span>
-                    <i class="fas fa-external-link-alt text-gray-500"></i>
-                </div>
-                <div class="border border-gray-700 rounded p-2 flex justify-between items-center text-xs">
-                    <span>Institute of Computer Engineers of the Philippines (ICPEP)</span>
-                    <i class="fas fa-external-link-alt text-gray-500"></i>
-                </div>
-                <div class="border border-gray-700 rounded p-2 flex justify-between items-center text-xs">
-                    <span>PocketDevs</span>
-                    <i class="fas fa-external-link-alt text-gray-500"></i>
-                </div>
-                <div class="border border-gray-700 rounded p-2 flex justify-between items-center text-xs">
-                    <span>Philippine Software Industry Association</span>
-                    <i class="fas fa-external-link-alt text-gray-500"></i>
-                </div>
-            </div>
-        </div>
+    <div class="flex items-center gap-2 mb-2 text-gray-400 text-sm">
+        <i class="fas fa-users"></i> A member of
+    </div>
+    <div class="space-y-2">
+        <a href="https://www.facebook.com/cpessUB" target="_blank" class="border border-gray-700 rounded p-2 flex justify-between items-center text-xs hover:bg-zinc-900 transition hover:border-zinc-500 group">
+            <span>Computer Engineering Student's Society</span>
+            <i class="fas fa-external-link-alt text-gray-500 group-hover:text-blue-400 transition"></i>
+        </a>
+
+        <a href="https://www.facebook.com/ICpEPR4A" target="_blank" class="border border-gray-700 rounded p-2 flex justify-between items-center text-xs hover:bg-zinc-900 transition hover:border-zinc-500 group">
+            <span>Institute of Computer Engineers of the Philippines (ICPEP)</span>
+            <i class="fas fa-external-link-alt text-gray-500 group-hover:text-blue-400 transition"></i>
+        </a>
+
+        <a href="https://pocketdevs.ph" target="_blank" class="border border-gray-700 rounded p-2 flex justify-between items-center text-xs hover:bg-zinc-900 transition hover:border-zinc-500 group">
+            <span>PocketDevs</span>
+            <i class="fas fa-external-link-alt text-gray-500 group-hover:text-blue-400 transition"></i>
+        </a>
+
+        <a href="https://psia.org.ph" target="_blank" class="border border-gray-700 rounded p-2 flex justify-between items-center text-xs hover:bg-zinc-900 transition hover:border-zinc-500 group">
+            <span>Philippine Software Industry Association</span>
+            <i class="fas fa-external-link-alt text-gray-500 group-hover:text-blue-400 transition"></i>
+        </a>
+    </div>
+</div>    
 
         <div class="card p-4 flex flex-col justify-between">
-            <div class="flex items-center gap-2 mb-2 text-gray-400 text-sm">
-                <i class="fas fa-link"></i> Social Links
-            </div>
-            <div class="space-y-2">
-                <div class="border border-gray-700 rounded p-2 flex items-center gap-3 text-sm">
-                    <i class="fab fa-linkedin text-xl"></i> LinkedIn
-                </div>
-                <div class="border border-gray-700 rounded p-2 flex items-center gap-3 text-sm">
-                    <i class="fab fa-github text-xl"></i> GitHub
-                </div>
-                <div class="border border-gray-700 rounded p-2 flex items-center gap-3 text-sm">
-                    <i class="fab fa-instagram text-xl"></i> Instagram
-                </div>
-            </div>
-        </div>
+    <div class="flex items-center gap-2 mb-2 text-gray-400 text-sm">
+        <i class="fas fa-link"></i> Social Links
+    </div>
+    <div class="space-y-2">
+        <a href="https://www.facebook.com/Destroyers4" target="_blank" rel="noopener noreferrer" 
+           class="social-link-card border border-gray-700 rounded p-2 flex items-center gap-3 text-sm transition-all">
+            <i class="fab fa-facebook text-xl text-[#1877F2]"></i> 
+            <span class="text-gray-300">Facebook</span>
+        </a>
+
+        <a href="https://www.linkedin.com/in/mac-xiaobin-villacrusis" target="_blank" rel="noopener noreferrer" 
+           class="social-link-card border border-gray-700 rounded p-2 flex items-center gap-3 text-sm transition-all">
+            <i class="fab fa-linkedin text-xl text-[#0A66C2]"></i> 
+            <span class="text-gray-300">LinkedIn</span>
+        </a>
+
+        <a href="https://github.com/Xi-Cpu-afk" target="_blank" rel="noopener noreferrer" 
+           class="social-link-card border border-gray-700 rounded p-2 flex items-center gap-3 text-sm transition-all">
+            <i class="fab fa-github text-xl text-white"></i> 
+            <span class="text-gray-300">GitHub</span>
+        </a>
+
+        <a href="https://www.instagram.com/maccxiaoobiinn" target="_blank" rel="noopener noreferrer" 
+           class="social-link-card border border-gray-700 rounded p-2 flex items-center gap-3 text-sm transition-all">
+            <i class="fab fa-instagram text-xl text-[#E4405F]"></i> 
+            <span class="text-gray-300">Instagram</span>
+        </a>
+    </div>
+</div>
 
         <div class="card p-4 flex flex-col justify-between">
             <div class="flex items-center gap-2 mb-2 text-gray-400 text-sm">
                 <i class="fas fa-microphone"></i> Meet Me
             </div>
-            <p class="text-xs text-gray-400 mt-2 mb-auto">
+            <p class="text-medium text-gray-400 mt-2 mb-auto">
                 Available for online bootcamps and events about software development and emerging technologies.
             </p>
-            <div class="flex justify-between items-center text-sm font-medium mt-4 cursor-pointer hover:text-white transition">
-                <span>Get in touch</span>
-                <i class="fas fa-chevron-right"></i>
-            </div>
+
+             <p class="text-medium text-gray-400 mt-2 mb-auto">
+                Meet me at University of Batangas.
+            </p>
+            
         </div>
 
         <div class="flex flex-col gap-2">
@@ -404,32 +459,779 @@
             <h2 class="font-bold text-lg">Gallery</h2>
         </div>
         <div class="relative">
-            <div class="flex gap-4 overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1544531586-fde5298cdd40?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200&q=80" class="rounded-lg h-48 w-auto object-cover opacity-80 hover:opacity-100 transition">
-                <img src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200&q=80" class="rounded-lg h-48 w-auto object-cover opacity-80 hover:opacity-100 transition">
-                <img src="https://images.unsplash.com/photo-1551818255-e6e10975bc17?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200&q=80" class="rounded-lg h-48 w-auto object-cover opacity-80 hover:opacity-100 transition">
-                <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200&q=80" class="rounded-lg h-48 w-auto object-cover opacity-80 hover:opacity-100 transition">
-                <img src="https://images.unsplash.com/photo-1596524430615-b46475ddff6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200&q=80" class="rounded-lg h-48 w-auto object-cover opacity-80 hover:opacity-100 transition">
+            <div id="gallery-track" class="gallery-track flex gap-4 overflow-x-auto no-scrollbar" tabindex="0" aria-label="Photo gallery" role="list">
+                <img src="D:\CV WEB UPDATED\src\components\congresspic.jpg" class="gallery-item rounded-lg h-48 w-auto object-cover opacity-80 hover:opacity-100 transition" role="listitem" alt="Congress event">
+                <img src="D:\CV WEB UPDATED\src\components\Convention.jpg" class="gallery-item rounded-lg h-48 w-auto object-cover opacity-80 hover:opacity-100 transition" role="listitem" alt="Convention group photo">
+                <img src="D:\CV WEB UPDATED\src\components\groupphotolibrary.jpg" class="gallery-item rounded-lg h-48 w-auto object-cover opacity-80 hover:opacity-100 transition" role="listitem" alt="Group photo">
+                <img src="D:\CV WEB UPDATED\src\components\Leadership.jpg" class="gallery-item rounded-lg h-48 w-auto object-cover opacity-80 hover:opacity-100 transition" role="listitem" alt="Leadership team">
+                <img src="D:\CV WEB UPDATED\src\components\sportsco.jpg" class="gallery-item rounded-lg h-48 w-auto object-cover opacity-80 hover:opacity-100 transition" role="listitem" alt="Sports event">
+                <img src="D:\CV WEB UPDATED\src\components\teambldgICPEP.jpg" class="gallery-item rounded-lg h-48 w-auto object-cover opacity-80 hover:opacity-100 transition" role="listitem" alt="Team building">
+                <img src="D:\CV WEB UPDATED\src\components\teambuilding.jpg" class="gallery-item rounded-lg h-48 w-auto object-cover opacity-80 hover:opacity-100 transition" role="listitem" alt="Team building 2">
+                <img src="D:\CV WEB UPDATED\src\components\teamvball.jpg" class="gallery-item rounded-lg h-48 w-auto object-cover opacity-80 hover:opacity-100 transition" role="listitem" alt="Team volleyball">
             </div>
             
-            <button class="absolute left-0 top-1/2 -translate-y-1/2 bg-black/50 p-2 rounded-full border border-gray-600 text-white hover:bg-black">
+            <button id="gallery-prev" class="absolute left-0 top-1/2 -translate-y-1/2 bg-black/50 p-2 rounded-full border border-gray-600 text-white hover:bg-black focus:outline-none" aria-label="Previous image">
                 <i class="fas fa-chevron-left"></i>
             </button>
-            <button class="absolute right-0 top-1/2 -translate-y-1/2 bg-black/50 p-2 rounded-full border border-gray-600 text-white hover:bg-black">
+            <button id="gallery-next" class="absolute right-0 top-1/2 -translate-y-1/2 bg-black/50 p-2 rounded-full border border-gray-600 text-white hover:bg-black focus:outline-none" aria-label="Next image">
                 <i class="fas fa-chevron-right"></i>
             </button>
+        </div> 
+    </div>
+
+    <!-- Schedule modal -->
+    <div id="schedule-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="schedule-modal-title" aria-hidden="true">
+        <div class="modal-overlay" data-dismiss="modal"></div>
+        <div class="modal-panel card p-6">
+            <h3 id="schedule-modal-title" class="font-bold text-lg">Schedule a Call</h3>
+            <form id="schedule-form" class="mt-4" novalidate>
+                <div class="mb-3">
+                    <label class="text-xs text-gray-400">Your Name</label>
+                    <input type="text" name="name" class="input-field w-full p-2 mt-1 rounded border" placeholder="Your name" required>
+                </div>
+                <div class="mb-3">
+                    <label class="text-xs text-gray-400">Your Email</label>
+                    <input type="email" name="email" id="schedule-email" class="input-field w-full p-2 mt-1 rounded border" placeholder="you@example.com" required>
+                </div>
+                <div class="mb-3 grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="text-xs text-gray-400">Date</label>
+                        <input type="date" name="date" id="schedule-date" class="input-field w-full p-2 mt-1 rounded border" required>
+                    </div>
+                    <div>
+                        <label class="text-xs text-gray-400">Time</label>
+                        <input type="time" name="time" id="schedule-time" class="input-field w-full p-2 mt-1 rounded border" required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="text-xs text-gray-400">Duration</label>
+                    <select name="duration" id="schedule-duration" class="input-field w-full p-2 mt-1 rounded border">
+                        <option value="15">15 minutes</option>
+                        <option value="30" selected>30 minutes</option>
+                        <option value="45">45 minutes</option>
+                        <option value="60">60 minutes</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="text-xs text-gray-400">Notes (optional)</label>
+                    <textarea name="notes" id="schedule-notes" class="input-field w-full p-2 mt-1 rounded border" rows="3" placeholder="Any details..."></textarea>
+                </div>
+
+                <div id="schedule-preview" class="p-3 mt-3 rounded border bg-transparent text-sm flex items-start gap-3">
+                    <div class="preview-icon mt-1 text-gray-400"><i class="far fa-calendar-alt"></i></div>
+                    <div class="flex-1">
+                        <strong>Preview:</strong>
+                        <div id="schedule-preview-content" class="mt-2 text-sm text-gray-400">Select a date and time to see a preview.</div>
+                        <div id="schedule-preview-utc" class="mt-1 text-xs text-gray-500"></div>
+                        <div id="schedule-timezone" class="mt-1 text-xs text-gray-500"></div>
+                    </div>
+                </div>
+
+                <div id="schedule-status" class="text-sm mt-2" aria-live="polite"></div>
+
+                <div class="flex gap-2 justify-end mt-3">
+                    <button type="submit" class="cta-btn bg-white text-black" id="schedule-send">Confirm & Download</button>
+                    <button type="button" id="schedule-cancel" class="cta-btn">Cancel</button>
+                </div>
+            </form>
         </div>
     </div>
 
+    <!-- Email modal -->
+    <div id="email-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="email-modal-title" aria-hidden="true">
+        <div class="modal-overlay" data-dismiss="modal"></div>
+        <div class="modal-panel card p-6">
+            <h3 id="email-modal-title" class="font-bold text-lg">Send an Email</h3>
+            <form id="email-form" class="mt-4" novalidate>
+                <div class="mb-3">
+                    <label class="text-xs text-gray-400">Your Name (optional)</label>
+                    <input type="text" name="name" class="input-field w-full p-2 mt-1 rounded border" placeholder="Your name">
+                </div>
+                <div class="mb-3">
+                    <label class="text-xs text-gray-400">Your Email (optional)</label>
+                    <input type="email" name="from" class="input-field w-full p-2 mt-1 rounded border" placeholder="you@example.com">
+                </div>
+                <div class="mb-3">
+                    <label class="text-xs text-gray-400">Subject</label>
+                    <input id="email-subject" type="text" name="subject" required class="input-field w-full p-2 mt-1 rounded border" placeholder="Subject">
+                    <p class="form-error hidden text-xs mt-1" id="error-subject">Subject is required.</p>
+                </div>
+                <div class="mb-3">
+                    <label class="text-xs text-gray-400">Message</label>
+                    <textarea id="email-message" name="message" required class="input-field w-full p-2 mt-1 rounded border" rows="5" placeholder="Write your message"></textarea>
+                    <p class="form-error hidden text-xs mt-1" id="error-message">Message is required.</p>
+                </div>
+
+                <div id="email-status" class="text-sm mt-2" aria-live="polite"></div>
+
+                <div class="flex gap-2 justify-end mt-3">
+                    <button type="submit" class="cta-btn bg-white text-black" id="email-send">Send</button>
+                    <button type="button" id="email-cancel" class="cta-btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div> 
+
+    <!-- Email modal removed -->
+
+    <!-- Chat modal -->
+    <div id="chat-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="chat-modal-title" aria-hidden="true">
+        <div class="modal-overlay" data-dismiss="modal"></div>
+        <div class="modal-panel card p-0 max-w-sm w-full overflow-hidden">
+            <header class="flex items-center gap-3 px-3 py-2 bg-[#06121a] text-white">
+                <div class="flex items-center gap-3">
+                    <img id="chat-avatar" src="profile1.png" alt="Avatar" class="w-9 h-9 rounded-full border" />
+                    <div>
+                        <div class="font-semibold" id="chat-title">Chat with Xiao</div>
+                        <div class="text-xs text-green-400" id="chat-presence">Online</div>
+                    </div>
+                </div>
+                <div class="ml-auto flex items-center gap-2">
+                    <button id="chat-export" class="cta-btn" title="Export conversation">Export</button>
+                    <button id="chat-clear" class="cta-btn" title="Clear conversation">Clear</button>
+                    <button id="chat-presence-toggle" class="cta-btn" title="Toggle presence">Go offline</button>
+                    <button id="chat-close" class="ml-1 cta-btn" type="button" aria-label="Close chat">✕</button>
+                </div>
+            </header>
+            <div class="chat-toolbar px-3 py-2 bg-[#06121a]"><input id="chat-search" placeholder="Search messages" class="input-field p-2 rounded border bg-[#071018] text-white w-full" /></div>
+            <div id="chat-thread" class="chat-thread mb-0 overflow-y-auto bg-[#030507]" tabindex="0" aria-live="polite" style="max-height:42vh"></div>
+            <form id="chat-form" class="px-3 py-2 flex items-end gap-2 bg-[#030507]" autocomplete="off">
+                <input id="chat-input" class="input-field flex-1 p-3 rounded border bg-[#07090b] text-white" placeholder="Type a message..." aria-label="Message" maxlength="1000" required>
+                <button type="submit" class="cta-btn chat-send bg-white text-black" aria-label="Send message">➤</button>
+            </form>
+            <div class="px-3 pb-3 flex items-center justify-between text-xs text-gray-400">
+                <div>Ask me about programming, web dev, or tech!</div>
+                <div id="chat-count">0/1000</div>
+            </div>
+        </div>
+    </div> 
+
     <footer class="text-center text-gray-500 text-sm pb-10">
         &copy; 2026 Mac Xiaobin Villacusis. All rights reserved.
-    </footer>
+    </footer> 
 
     <div class="fixed bottom-6 right-6 z-50">
-        <button class="bg-white text-black px-5 py-3 rounded-full font-bold shadow-lg flex items-center gap-2 hover:bg-gray-200 transition">
+        <button id="chat-btn" class="chat-btn bg-white text-black px-5 py-3 rounded-full font-bold shadow-lg flex items-center gap-2 hover:bg-gray-200 transition" aria-label="Chat with Xiao">
             <i class="far fa-comment-dots text-lg"></i> Chat with Xiao
         </button>
     </div>
+
+    <script>
+    (function(){
+        const toggle = document.getElementById('theme-toggle');
+        const icon = document.getElementById('theme-toggle-icon');
+        const storageKey = 'theme';
+        const spinTime = 360;
+
+        function applyTheme(t){
+            document.documentElement.setAttribute('data-theme', t);
+            if(icon){
+                icon.classList.remove('fa-moon','fa-sun');
+                icon.classList.add(t === 'dark' ? 'fa-moon' : 'fa-sun');
+                icon.style.transform = 'rotate(360deg)';
+                setTimeout(()=>{ icon.style.transform = ''; }, spinTime);
+            }
+            if(toggle){
+                toggle.setAttribute('aria-pressed', t === 'dark');
+            }
+        }
+
+        const saved = localStorage.getItem(storageKey);
+        const systemPref = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        applyTheme(saved || systemPref);
+
+        function swapProfileImages(theme){
+            const imgs = document.querySelectorAll('#profile-container .profile-img');
+            imgs.forEach(img => {
+                const darkSrc = img.getAttribute('data-dark-src');
+                const lightSrc = img.getAttribute('data-light-src');
+                const targetSrc = theme === 'dark' ? darkSrc : (lightSrc || darkSrc);
+                if(!targetSrc) return;
+                // smooth swap: fade out -> change src -> fade in
+                img.style.opacity = '0';
+                const pre = new Image();
+                pre.src = targetSrc;
+                pre.onload = ()=>{
+                    img.src = targetSrc;
+                    img.classList.remove('photo-dark','photo-light');
+                    img.classList.add(theme === 'dark' ? 'photo-dark' : 'photo-light');
+                    requestAnimationFrame(()=>{ img.style.opacity = ''; });
+                };
+            });
+        }
+
+        // ensure swap runs on initial apply
+        swapProfileImages(saved || systemPref);
+
+        if(toggle){
+            toggle.addEventListener('click', () => {
+                const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                applyTheme(next);
+                swapProfileImages(next);
+                localStorage.setItem(storageKey, next);
+            });
+        }
+
+        if(window.matchMedia){
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e=>{
+                if(!localStorage.getItem(storageKey)){
+                    applyTheme(e.matches ? 'dark' : 'light');
+                }
+            });
+        }
+
+        // --- Email modal handlers ---
+        const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mjgrlvel';
+
+        // --- Schedule modal handlers ---
+        const openScheduleBtn = document.getElementById('open-schedule-modal');
+        const scheduleModal = document.getElementById('schedule-modal');
+        const scheduleForm = document.getElementById('schedule-form');
+        const scheduleCancel = document.getElementById('schedule-cancel');
+
+        function openScheduleModal(){
+            if(!scheduleModal) return;
+            const last = document.activeElement;
+            scheduleModal.classList.remove('hidden');
+            scheduleModal.setAttribute('aria-hidden','false');
+            const date = scheduleModal.querySelector('#schedule-date');
+            if(date){ const today = new Date().toISOString().split('T')[0]; date.setAttribute('min', today); date.focus(); }
+            document.body.style.overflow = 'hidden';
+            scheduleModal._lastFocus = last;
+        }
+
+        function closeScheduleModal(){
+            if(!scheduleModal) return;
+            scheduleModal.classList.add('hidden');
+            scheduleModal.setAttribute('aria-hidden','true');
+            const last = scheduleModal._lastFocus; if(last) last.focus();
+            document.body.style.overflow = '';
+            setTimeout(()=>{ const s = document.getElementById('schedule-status'); if(s) s.textContent = ''; }, 250);
+        }
+
+        if(openScheduleBtn) openScheduleBtn.addEventListener('click', openScheduleModal);
+        if(scheduleCancel) scheduleCancel.addEventListener('click', closeScheduleModal);
+        if(scheduleModal){
+            scheduleModal.addEventListener('click', function(e){ if(e.target.classList.contains('modal-overlay') || e.target.dataset.dismiss === 'modal'){ closeScheduleModal(); } });
+            scheduleModal.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeScheduleModal(); });
+        }
+
+        function setScheduleStatus(text, kind){ const el = document.getElementById('schedule-status'); if(!el) return; el.textContent = text || ''; el.classList.remove('status-success','status-error'); if(kind) el.classList.add(kind === 'ok' ? 'status-success' : 'status-error'); }
+
+        function createAndDownloadICS(opts){
+            const { name, email, date, time, duration, notes } = opts;
+            const [yyyy, mm, dd] = date.split('-').map(Number);
+            const [hh, mn] = time.split(':').map(Number);
+            const start = new Date(yyyy, mm-1, dd, hh, mn);
+            const end = new Date(start.getTime() + (parseInt(duration,10)||30)*60000);
+            const fmt = d=>d.toISOString().replace(/[-:]/g,'').split('.')[0] + 'Z';
+            const uid = `schedule-${Date.now()}@example.com`;
+            const ics = [
+                'BEGIN:VCALENDAR',
+                'VERSION:2.0',
+                'PRODID:-//Schedule//EN',
+                'BEGIN:VEVENT',
+                `UID:${uid}`,
+                `DTSTAMP:${fmt(new Date())}`,
+                `DTSTART:${fmt(start)}`,
+                `DTEND:${fmt(end)}`,
+                `SUMMARY:Call with ${name || 'Guest'}`,
+                `DESCRIPTION:Scheduled by: ${name || ''}\\nEmail: ${email || ''}${notes ? '\\n\\nNotes:\\n' + notes : ''}`,
+                'END:VEVENT',
+                'END:VCALENDAR'
+            ].join('\r\n');
+            const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a'); a.href = url; a.download = `schedule-${yyyy}${String(mm).padStart(2,'0')}${String(dd).padStart(2,'0')}.ics`; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+        }
+
+        if(scheduleForm){
+            // live preview update logic
+            const previewContent = document.getElementById('schedule-preview-content');
+            const previewTz = document.getElementById('schedule-timezone');
+            const previewUtcEl = document.getElementById('schedule-preview-utc');
+            const scheduleDate = document.getElementById('schedule-date');
+            const scheduleTime = document.getElementById('schedule-time');
+            const scheduleDuration = document.getElementById('schedule-duration');
+            const scheduleEmail = document.getElementById('schedule-email');
+            const scheduleSendBtn = document.getElementById('schedule-send');
+
+            function formatRange(dateStr, timeStr, durationMin){
+                try{
+                    if(!dateStr || !timeStr) return null;
+                    const [yyyy, mm, dd] = dateStr.split('-').map(Number);
+                    const [hh, mn] = timeStr.split(':').map(Number);
+                    const start = new Date(yyyy, mm-1, dd, hh, mn);
+                    const end = new Date(start.getTime() + (parseInt(durationMin,10)||30) * 60000);
+                    const locale = navigator.language || 'en-US';
+                    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+                    const opts = { weekday:'short', year:'numeric', month:'short', day:'numeric', hour:'numeric', minute:'2-digit' };
+                    const startStr = start.toLocaleString(locale, opts);
+                    const endStr = end.toLocaleString(locale, { hour:'numeric', minute:'2-digit' });
+                    // build UTC strings
+                    const startUTC = new Date(start.getTime()).toUTCString();
+                    const endUTC = new Date(end.getTime()).toUTCString();
+                    return { text: `${startStr} – ${endStr}`, tz, utcText: `${startUTC} – ${endUTC}` };
+                }catch(err){ return null; }
+            }
+
+            function updatePreview(){
+                const date = scheduleDate ? scheduleDate.value : '';
+                const time = scheduleTime ? scheduleTime.value : '';
+                const dur = scheduleDuration ? scheduleDuration.value : '30';
+                const email = scheduleEmail ? scheduleEmail.value.trim() : '';
+                const formatted = formatRange(date, time, dur);
+                const previewIcon = document.querySelector('#schedule-preview .preview-icon');
+
+                if(formatted){
+                    previewContent.textContent = formatted.text;
+                    if(previewUtcEl) previewUtcEl.textContent = 'UTC: ' + formatted.utcText;
+                    previewTz.textContent = formatted.tz ? 'Time zone: ' + formatted.tz : '';
+                    if(previewIcon) previewIcon.classList.add('active');
+                } else {
+                    previewContent.textContent = 'Select a date and time to see a preview.';
+                    if(previewUtcEl) previewUtcEl.textContent = '';
+                    previewTz.textContent = '';
+                    if(previewIcon) previewIcon.classList.remove('active');
+                }
+                // enable confirm if required fields present
+                if(scheduleSendBtn) scheduleSendBtn.disabled = !(date && time && email);
+            }
+
+            // attach listeners
+            [scheduleDate, scheduleTime, scheduleDuration, scheduleEmail].forEach(el=>{ if(el) el.addEventListener('input', updatePreview); if(el) el.addEventListener('change', updatePreview); });
+
+            // run once initially
+            updatePreview();
+
+            scheduleForm.addEventListener('submit', async function(e){
+                e.preventDefault();
+                setScheduleStatus('Validating...', null);
+                const name = (scheduleForm.querySelector('[name="name"]')||{value:''}).value.trim();
+                const email = (scheduleForm.querySelector('[name="email"]')||{value:''}).value.trim();
+                const date = (scheduleForm.querySelector('[name="date"]')||{value:''}).value;
+                const time = (scheduleForm.querySelector('[name="time"]')||{value:''}).value;
+                const duration = (scheduleForm.querySelector('[name="duration"]')||{value:'30'}).value;
+                const notes = (scheduleForm.querySelector('[name="notes"]')||{value:''}).value.trim();
+                if(!date || !time || !email){ setScheduleStatus('Please fill date, time and your email.', 'error'); return; }
+                if(scheduleSendBtn){ scheduleSendBtn.disabled = true; scheduleSendBtn.setAttribute('aria-busy','true'); }
+                setScheduleStatus('Creating calendar file...', null);
+                try{
+                    createAndDownloadICS({ name, email, date, time, duration, notes });
+                    try{
+                        const payload = { type: 'schedule', name, email, date, time, duration, notes };
+                        const res = await fetch(FORMSPREE_ENDPOINT, { method: 'POST', headers: { 'Accept':'application/json', 'Content-Type':'application/json' }, body: JSON.stringify(payload) });
+                        if(res && res.ok){ setScheduleStatus('Scheduled — notification sent. Thank you!', 'ok'); scheduleForm.reset(); setTimeout(()=>{ closeScheduleModal(); setScheduleStatus('', null); updatePreview(); }, 1400); }
+                        else { setScheduleStatus('Scheduled locally. Could not notify automatically; please email to confirm.', 'error'); }
+                    }catch(err){
+                        const to = 'macxiaobin0517@gmail.com';
+                        const subj = `Schedule request: ${name || 'Guest'} - ${date} ${time}`;
+                        const body = `Name: ${name}\nEmail: ${email}\nDate: ${date}\nTime: ${time}\nDuration: ${duration} minutes\n\nNotes:\n${notes}`;
+                        window.location.href = `mailto:${to}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
+                        setScheduleStatus('Scheduled locally. Mail client opened to confirm the request.', 'ok');
+                        setTimeout(()=>{ closeScheduleModal(); setScheduleStatus('', null); updatePreview(); }, 1400);
+                    }
+                }catch(err){ setScheduleStatus('Error creating calendar file.', 'error'); }
+                finally{ if(scheduleSendBtn){ scheduleSendBtn.disabled = false; scheduleSendBtn.removeAttribute('aria-busy'); } }
+            });
+        }
+
+        // --- Email modal handlers ---
+        const openEmailBtn = document.getElementById('open-email-modal');
+        const emailModal = document.getElementById('email-modal');
+        const emailForm = document.getElementById('email-form');
+        const emailCancel = document.getElementById('email-cancel');
+        let lastFocusedElement = null;
+
+        function openEmailModal(){
+            if(!emailModal) return;
+            lastFocusedElement = document.activeElement;
+            emailModal.classList.remove('hidden');
+            emailModal.setAttribute('aria-hidden','false');
+            const first = emailModal.querySelector('[name="subject"]') || emailModal.querySelector('input');
+            (first || emailModal).focus();
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeEmailModal(){
+            if(!emailModal) return;
+            emailModal.classList.add('hidden');
+            emailModal.setAttribute('aria-hidden','true');
+            if(lastFocusedElement) lastFocusedElement.focus();
+            document.body.style.overflow = '';
+            const s = document.getElementById('email-status'); if(s) s.textContent = '';
+        }
+
+        if(openEmailBtn) openEmailBtn.addEventListener('click', openEmailModal);
+        if(emailCancel) emailCancel.addEventListener('click', closeEmailModal);
+        if(emailModal){
+            emailModal.addEventListener('click', function(e){
+                if(e.target.classList.contains('modal-overlay') || e.target.dataset.dismiss === 'modal'){
+                    closeEmailModal();
+                }
+            });
+            emailModal.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeEmailModal(); });
+        }
+
+        if(emailForm){
+            const statusEl = document.getElementById('email-status');
+            const errorSubject = document.getElementById('error-subject');
+            const errorMessage = document.getElementById('error-message');
+            const sendBtn = document.getElementById('email-send');
+
+            function setStatus(text, kind){
+                if(!statusEl) return;
+                statusEl.textContent = text || '';
+                statusEl.classList.remove('status-success','status-error');
+                if(kind) statusEl.classList.add(kind === 'ok' ? 'status-success' : 'status-error');
+            }
+
+            emailForm.addEventListener('submit', async function(e){
+                e.preventDefault();
+                // clear errors
+                errorSubject.classList.add('hidden');
+                errorMessage.classList.add('hidden');
+                setStatus('', null);
+
+                const name = (emailForm.querySelector('[name="name"]') || {value:''}).value.trim();
+                const from = (emailForm.querySelector('[name="from"]') || {value:''}).value.trim();
+                const subject = (emailForm.querySelector('[name="subject"]') || {value:''}).value.trim();
+                const message = (emailForm.querySelector('[name="message"]') || {value:''}).value.trim();
+
+                let valid = true;
+                if(!subject){ errorSubject.classList.remove('hidden'); valid = false; }
+                if(!message){ errorMessage.classList.remove('hidden'); valid = false; }
+                if(!valid) { setStatus('Please fill required fields.', 'error'); return; }
+
+                // disable submit
+                if(sendBtn) { sendBtn.disabled = true; sendBtn.setAttribute('aria-busy','true'); }
+                setStatus('Sending...', null);
+
+                // If no Formspree ID replaced yet, fallback to mailto (keeps behavior working until you set up Formspree)
+                if(FORMSPREE_ENDPOINT.includes('{your-form-id}')){
+                    const to = 'macxiaobin0517@gmail.com';
+                    let body = '';
+                    if(name) body += `From: ${name}${from ? ' <' + from + '>' : ''}\n\n`;
+                    body += message;
+                    const mailto = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                    window.location.href = mailto;
+                    setStatus('Opening your email client...', 'ok');
+                    closeEmailModal();
+                    if(sendBtn) { sendBtn.disabled = false; sendBtn.removeAttribute('aria-busy'); }
+                    return;
+                }
+
+                try{
+                    const payload = { name, from, subject, message };
+                    const res = await fetch(FORMSPREE_ENDPOINT, {
+                        method: 'POST',
+                        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if(res.ok){
+                        setStatus('Message sent — thank you!', 'ok');
+                        emailForm.reset();
+                        setTimeout(()=> { closeEmailModal(); setStatus('', null); }, 1400);
+                    } else {
+                        const data = await res.json().catch(()=>null);
+                        const msg = (data && data.error) ? data.error : 'Send failed. Please try again later.';
+                        setStatus(msg, 'error');
+                    }
+                }catch(err){
+                    setStatus('Network error — try again later.', 'error');
+                }finally{
+                    if(sendBtn) { sendBtn.disabled = false; sendBtn.removeAttribute('aria-busy'); }
+                }
+            });
+        }
+
+        // --- Chat modal handlers ---
+        const chatBtn = document.getElementById('chat-btn');
+        const chatModal = document.getElementById('chat-modal');
+        const chatClose = document.getElementById('chat-close');
+        const chatForm = document.getElementById('chat-form');
+        const chatInput = document.getElementById('chat-input');
+        const chatThread = document.getElementById('chat-thread');
+        const chatStatus = document.getElementById('chat-status');
+        const CHAT_STORAGE_KEY = 'chat_messages_v1';
+
+        function loadChatMessages(){ try{ return JSON.parse(localStorage.getItem(CHAT_STORAGE_KEY) || '[]'); }catch(e){ return []; } }
+        function saveChatMessages(arr){ localStorage.setItem(CHAT_STORAGE_KEY, JSON.stringify(arr)); }
+        function escapeHtml(s){ return String(s).replace(/[&<>"']/g, function(c){ return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;" }[c]; }); }
+        function formatTime(ts){ const d = new Date(ts||Date.now()); return d.toLocaleTimeString([], { hour:'2-digit', minute:'2-digit' }); }
+
+        function renderChat(){ const msgs = loadChatMessages(); if(!chatThread) return; chatThread.innerHTML = msgs.map(m=>{
+            const who = m.who; const bubbleClass = who === 'user' ? 'chat-bubble user' : 'chat-bubble xiao';
+            const time = m.ts ? formatTime(m.ts) : '';
+            const status = m.status ? `<div class="chat-msg-status text-xs ${m.status === 'failed' ? 'text-red-500' : 'text-gray-400'}">${m.status === 'failed' ? '<button class="retry-btn" data-id="'+m.id+'">Retry</button>' : (m.status === 'pending' ? 'Sending...' : '')}</div>` : '';
+            if(who === 'user') return `<div class="chat-msg user"><div class="${bubbleClass}">${escapeHtml(m.text)}${status}<div class="chat-ts">${time}</div></div></div>`;
+            return `<div class="chat-msg xiao"><div class="${bubbleClass}">${escapeHtml(m.text)}<div class="chat-ts">${time}</div></div></div>`;
+        }).join(''); chatThread.scrollTop = chatThread.scrollHeight; }
+
+        function openChatModal(){ if(!chatModal) return; chatModal.classList.remove('hidden'); chatModal.setAttribute('aria-hidden','false'); chatModal._lastFocus = document.activeElement; chatInput && chatInput.focus(); document.body.style.overflow = 'hidden'; const msgs = loadChatMessages(); if(!msgs || msgs.length === 0){ const greeting = { id: Date.now(), who: 'xiao', text: 'Hi — I\'m Xiao. How can I help?', ts: Date.now(), status: 'sent' }; saveChatMessages([greeting]); }
+            renderChat(); }
+        function closeChatModal(){ if(!chatModal) return; chatModal.classList.add('hidden'); chatModal.setAttribute('aria-hidden','true'); const last = chatModal._lastFocus; if(last) last.focus(); document.body.style.overflow = ''; }
+
+        if(chatBtn) chatBtn.addEventListener('click', openChatModal);
+        if(chatClose) chatClose.addEventListener('click', closeChatModal);
+        if(chatModal){ chatModal.addEventListener('click', function(e){ if(e.target.classList.contains('modal-overlay') || e.target.dataset.dismiss === 'modal'){ closeChatModal(); } }); chatModal.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeChatModal(); }); }
+
+        const CHAT_API_ENDPOINT = window.CHAT_API_ENDPOINT || '/api/gemini_chat';
+
+        async function sendToGemini(text, userMsgId){
+            // create an empty bot message that we'll stream into
+            const botId = Date.now() + 1;
+            const botMsg = { id: botId, who: 'xiao', text: '', ts: Date.now(), status: 'pending' };
+            const msgs = loadChatMessages(); msgs.push(botMsg); saveChatMessages(msgs); renderChat();
+
+            // show assistant typing indicator appended while streaming
+            const typingEl = appendTyping();
+
+            try{
+                const streamRes = await fetch(CHAT_API_ENDPOINT.replace('/api/gemini_chat','/api/gemini_stream'), {
+                    method: 'POST',
+                    headers: { 'Accept': 'text/event-stream', 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: text })
+                });
+                if(!streamRes.ok) throw new Error('Streaming API error');
+
+                const reader = streamRes.body.getReader();
+                const decoder = new TextDecoder();
+                let accumulated = '';
+
+                while(true){
+                    const { done, value } = await reader.read();
+                    if(done) break;
+                    const raw = decoder.decode(value, { stream: true });
+                    // upstream sends SSE-style data: { chunk }
+                    // parse out any JSON payloads in the chunk
+                    let piece = '';
+                    try{
+                        const lines = raw.split(/\r?\n/).filter(Boolean);
+                        for(const ln of lines){
+                            const s = ln.trim();
+                            if(s.startsWith('data:')){
+                                const payload = s.replace(/^data:\s*/,'');
+                                if(payload === '[DONE]') continue;
+                                try{ const obj = JSON.parse(payload); if(obj && obj.chunk) piece += obj.chunk; else piece += payload; }catch(e){ piece += payload; }
+                            } else {
+                                piece += s;
+                            }
+                        }
+                    }catch(e){ piece = raw; }
+
+                    if(piece){
+                        accumulated += piece;
+                        // update the streaming bot message text
+                        const a = loadChatMessages(); const b = a.find(x=>x.id === botId); if(b){ b.text = accumulated; saveChatMessages(a); renderChat(); }
+                    }
+                }
+
+                // done streaming
+                typingEl.remove();
+                // mark bot as sent
+                const a2 = loadChatMessages(); const b2 = a2.find(x=>x.id === botId); if(b2){ b2.status = 'sent'; saveChatMessages(a2); }
+                // mark user message sent too
+                const allMsgs = loadChatMessages(); const mu = allMsgs.find(x=>x.id === userMsgId); if(mu){ mu.status = 'sent'; saveChatMessages(allMsgs); }
+                renderChat();
+                chatStatus && (chatStatus.textContent = 'Message sent — thank you!');
+                return true;
+            }catch(err){
+                typingEl.remove();
+                // mark bot message failed
+                const a = loadChatMessages(); const b = a.find(x=>x.id === botId); if(b){ b.status = 'failed'; saveChatMessages(a); }
+                const all = loadChatMessages(); const m = all.find(x=>x.id === userMsgId); if(m){ m.status = 'failed'; saveChatMessages(all); }
+                renderChat();
+                chatStatus && (chatStatus.textContent = 'Could not send message to the AI backend.');
+                return false;
+            }
+        }
+
+        if(chatForm){
+            chatForm.addEventListener('submit', async function(e){
+                e.preventDefault(); const text = (chatInput && chatInput.value || '').trim(); if(!text) return; const msg = { id: Date.now(), who: 'user', text: text, ts: Date.now(), status: 'pending' };
+                const msgs = loadChatMessages(); msgs.push(msg); saveChatMessages(msgs); renderChat(); chatInput.value = ''; chatStatus.textContent = 'Sending...';
+                // Use streaming Gemini if available
+                const ok = await sendToGemini(text, msg.id);
+                if(!ok){ const all = loadChatMessages(); const m = all.find(x=>x.id === msg.id); if(m){ m.status = 'failed'; saveChatMessages(all); } renderChat(); }
+            });
+        }
+
+        // retry handler (uses Gemini proxy/sendToGemini)
+        if(chatThread){
+            chatThread.addEventListener('click', function(e){
+                const t = e.target;
+                if(t && t.classList && t.classList.contains('retry-btn')){
+                    const id = Number(t.dataset.id);
+                    const all = loadChatMessages();
+                    const m = all.find(x=>x.id === id);
+                    if(!m) return;
+                    m.status = 'pending'; saveChatMessages(all); renderChat();
+                    (async function(){
+                        try{
+                            const ok = await sendToGemini(m.text, m.id);
+                            if(ok){
+                                const all2 = loadChatMessages(); const mm = all2.find(x=>x.id === m.id); if(mm) mm.status = 'sent'; saveChatMessages(all2); renderChat(); chatStatus.textContent = 'Message resent.';
+                            } else { throw new Error('retry failed'); }
+                        }catch(err){
+                            m.status = 'failed'; saveChatMessages(all); renderChat(); chatStatus.textContent = 'Retry failed — try again.';
+                        }
+                    })();
+                }
+            });
+        }
+
+        // Chat toolbar handlers: search, export, clear, presence
+        const chatSearch = document.getElementById('chat-search');
+        const chatExport = document.getElementById('chat-export');
+        const chatClear = document.getElementById('chat-clear');
+        const chatPresenceToggle = document.getElementById('chat-presence-toggle');
+        const chatAvatar = document.getElementById('chat-avatar');
+        const chatTitle = document.getElementById('chat-title');
+        const chatPresence = document.getElementById('chat-presence');
+        const chatCount = document.getElementById('chat-count');
+
+        // set avatar and name (uses existing profile image) - change path if your assets are elsewhere
+        if(chatAvatar) chatAvatar.src = 'profile1.png';
+        if(chatTitle) chatTitle.textContent = 'Chat with Xiao';
+
+        // presence toggle
+        let presenceOnline = true;
+        if(chatPresenceToggle){
+            chatPresenceToggle.addEventListener('click', ()=>{
+                presenceOnline = !presenceOnline;
+                if(chatPresence) chatPresence.textContent = presenceOnline ? 'Online' : 'Offline';
+                chatPresenceToggle.textContent = presenceOnline ? 'Go offline' : 'Go online';
+                chatPresenceToggle.classList.toggle('opacity-60', !presenceOnline);
+            });
+        }
+
+        // search filter
+        if(chatSearch){ chatSearch.addEventListener('input', function(){ const term = (this.value||'').trim().toLowerCase(); renderChat(); if(!term) return; // filter
+            const nodes = Array.from(document.querySelectorAll('#chat-thread .chat-msg')); nodes.forEach(n=>{ const txt = n.textContent || ''; n.style.display = txt.toLowerCase().includes(term) ? '' : 'none'; }); }); }
+
+        // export conversation
+        if(chatExport){ chatExport.addEventListener('click', function(){ const data = loadChatMessages(); const blob = new Blob([JSON.stringify(data,null,2)], { type: 'application/json' }); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'chat-conversation.json'; document.body.appendChild(a); a.click(); a.remove(); }); }
+
+        // clear conversation
+        if(chatClear){ chatClear.addEventListener('click', function(){ if(!confirm('Clear the conversation history?')) return; localStorage.removeItem(CHAT_STORAGE_KEY); renderChat(); }); }
+
+        // --- Third photo toggle helpers (make #photo-3 interactive) ---
+        const photo3 = document.getElementById('photo-3');
+
+        function showThirdPhoto(){
+            if(!photo3) return;
+            photo3.style.opacity = '1';
+            photo3.classList.remove('pointer-events-none');
+            photo3.setAttribute('aria-hidden','false');
+            photo3.setAttribute('tabindex','0');
+            photo3.style.zIndex = '40';
+        }
+
+        function hideThirdPhoto(){
+            if(!photo3) return;
+            photo3.style.opacity = '0';
+            photo3.classList.add('pointer-events-none');
+            photo3.setAttribute('aria-hidden','true');
+            photo3.setAttribute('tabindex','-1');
+            photo3.style.zIndex = '20';
+        }
+
+        // expose for inline handlers
+        window.toggleThirdPhoto = function(){
+            if(!photo3) return;
+            const visible = getComputedStyle(photo3).opacity === '1';
+            if(visible) hideThirdPhoto(); else showThirdPhoto();
+        };
+        window.hideThirdPhoto = hideThirdPhoto;
+
+        if(photo3){
+            // clicking the image toggles it
+            photo3.addEventListener('click', function(e){
+                e.stopPropagation();
+                window.toggleThirdPhoto();
+            });
+
+            // keyboard support
+            photo3.addEventListener('keydown', function(e){
+                if(e.key === 'Enter' || e.key === ' '){
+                    e.preventDefault();
+                    window.toggleThirdPhoto();
+                } else if(e.key === 'Escape'){
+                    hideThirdPhoto();
+                }
+            });
+
+            // ensure initial hidden state
+            hideThirdPhoto();
+        }
+
+        // --- Gallery navigation (prev/next) ---
+        const galleryTrack = document.getElementById('gallery-track');
+        const galleryPrev = document.getElementById('gallery-prev');
+        const galleryNext = document.getElementById('gallery-next');
+
+        // find the item nearest to the center of the track
+        function getCenteredItem(){
+            if(!galleryTrack) return null;
+            const items = Array.from(galleryTrack.querySelectorAll('.gallery-item'));
+            const trackRect = galleryTrack.getBoundingClientRect();
+            const trackCenter = trackRect.left + (trackRect.width / 2);
+            let closest = null;
+            let minDist = Infinity;
+            items.forEach(item => {
+                const r = item.getBoundingClientRect();
+                const itemCenter = r.left + (r.width / 2);
+                const dist = Math.abs(itemCenter - trackCenter);
+                if(dist < minDist){ minDist = dist; closest = item; }
+            });
+            return closest;
+        }
+
+        function focusNeighbor(direction){
+            if(!galleryTrack) return;
+            const centered = getCenteredItem();
+            if(!centered) return;
+            const neighbor = direction === 'next' ? centered.nextElementSibling : centered.previousElementSibling;
+            const target = neighbor || (direction === 'next' ? galleryTrack.querySelector('.gallery-item:first-child') : galleryTrack.querySelector('.gallery-item:last-child'));
+            if(target){
+                target.scrollIntoView({ behavior: 'smooth', inline: 'center' });
+            }
+        }
+
+        function updateGalleryAria(){
+            if(!galleryTrack) return;
+            const centered = getCenteredItem();
+            const items = Array.from(galleryTrack.querySelectorAll('.gallery-item'));
+            items.forEach(i => i.removeAttribute('aria-current'));
+            if(centered) centered.setAttribute('aria-current','true');
+            // enable/disable buttons based on wrap (we always allow wrap so keep enabled)
+            if(galleryPrev) galleryPrev.disabled = false;
+            if(galleryNext) galleryNext.disabled = false;
+        }
+
+        if(galleryPrev) galleryPrev.addEventListener('click', ()=> focusNeighbor('prev'));
+        if(galleryNext) galleryNext.addEventListener('click', ()=> focusNeighbor('next'));
+
+        if(galleryTrack){
+            // keyboard navigation
+            galleryTrack.addEventListener('keydown', (e)=>{
+                if(e.key === 'ArrowLeft') { e.preventDefault(); focusNeighbor('prev'); }
+                if(e.key === 'ArrowRight') { e.preventDefault(); focusNeighbor('next'); }
+            });
+            // debounce scroll updates
+            let scrollTimer = null;
+            galleryTrack.addEventListener('scroll', ()=>{
+                if(scrollTimer) clearTimeout(scrollTimer);
+                scrollTimer = setTimeout(()=> updateGalleryAria(), 120);
+            });
+            // initial aria update after layout
+            setTimeout(updateGalleryAria, 50);
+        }
+
+    })();
+    </script>
 
 </body>
 </html>

@@ -15,3 +15,22 @@ Endpoints
 Important
 - Keep API keys server-side only. This is a minimal example and should be hardened for production (rate-limiting, auth, input validation, streaming support, logging, error handling, etc.).
 - The request/response shapes shown here are illustrative. Refer to the official Gemini / Google Generative AI docs for exact API usage.
+
+React Portfolio App
+
+This repository now contains a React-based portfolio front-end using Vite.
+
+Setup
+1. npm install
+2. npm run dev
+
+Build
+- npm run build
+- npm run preview
+
+Backend
+- npm start (runs the Express Gemini proxy from `server/index.cjs`)
+
+Static assets
+- `public/assets/` contains images and gallery assets.
+- The React app entry is `index.html` at the project root.

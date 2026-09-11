@@ -18,7 +18,6 @@ const content = {
     },
   ],
   projects: [
-    
     {
       title: 'Gigahertz',
       description: 'Gigahertz System Web',
@@ -63,17 +62,17 @@ const content = {
   ],
   recommendations: [
     {
-      text: 'Me and Xiao are bestfriends during college. He was our tech guy for coding and right now he\'s teaching me to be a better developer. He introduced me to Laravel and Bootstrap...',
+      text: 'Me and Xiao are bestfriends during college. He was our tech guy for coding and right now he is teaching me to be a better developer. He introduced me to Laravel and Bootstrap.',
       author: 'Aironn Jayfe Datinguinoo',
       role: 'Full-Stack Web Developer, BPI',
     },
     {
-      text: 'Kuya Xiao is a reliable senior with great expertise on software design and AI. This can be proven with plenty of projects he had done in the past presented at this very web page. He i[...]
+      text: 'Kuya Xiao is a reliable senior with great expertise on software design and AI. This can be proven with plenty of projects he has done in the past presented at this very web page.',
       author: 'Allan Justine Castromero',
       role: '4th Year Computer Engineering Student',
     },
     {
-      text: 'He is a coding enthusiast with a high level of expertise, whose work reflects both technical skill and creativity. From the moment we met, he is also social, approachable, and deeply [...]
+      text: 'He is a coding enthusiast with a high level of expertise, whose work reflects both technical skill and creativity. From the moment we met, he is also social, approachable, and deeply committed.',
       author: 'Kyle Faral',
       role: '3rd Year Computer Engineering Student',
     },

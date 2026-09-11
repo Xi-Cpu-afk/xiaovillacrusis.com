@@ -4,7 +4,137 @@ import content from './data/content';
 
 const CHAT_STORAGE_KEY = 'chat_messages_v1';
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mjgrlvel';
-const CHAT_API_ENDPOINT = '/api/gemini_chat';
+
+function buildLocalChatReply(message) {
+  const text = message.toLowerCase().replace(/[^a-z0-9\s]/g, ' ');
+  const stackSummary = content.techStacks.flatMap((group) => group.items).join(', ');
+  const projectSummary = content.projects.map((project) => project.title).join(', ');
+  const certificationSummary = content.certifications.map((cert) => cert.title).join(', ');
+  const experienceSummary = content.experiences.map((item) => item.title).join(', ');
+  const orgSummary = content.organizations.map((org) => org.label).join(', ');
+  const socialSummary = content.socialLinks.map((link) => link.label).join(', ');
+
+  const intents = [
+    {
+      id: 'greeting',
+      keywords: ['hi', 'hello', 'hey', 'good morning', 'good afternoon', 'good evening', 'yo', 'greetings'],
+      answer: 'Hi! I’m Xiao’s portfolio assistant. I can answer questions about his skills, projects, experience, certifications, and contact info.',
+    },
+    {
+      id: 'identity',
+      keywords: ['who is xiao', 'who is mac', 'who are you', 'what are you', 'xiao villacrusis', 'mac xiaobin'],
+      answer: 'I’m the portfolio assistant for Mac Xiaobin Villacrusis, a software engineer based in Metro Manila, Philippines. He works on modern web products, AI tools, and software engineering projects.',
+    },
+    {
+      id: 'location',
+      keywords: ['where is he from', 'where is xiao from', 'location', 'based in', 'metro manila'],
+      answer: 'Mac Xiaobin Villacrusis is based in Metro Manila, Philippines.',
+    },
+    {
+      id: 'about',
+      keywords: ['about him', 'bio', 'background', 'profile', 'tell me about'],
+      answer: 'He is a full-stack software engineer with a Bachelor of Science in Computer Engineering from the University of Batangas. He focuses on practical, user-centered software and AI-powered experiences.',
+    },
+    {
+      id: 'education',
+      keywords: ['education', 'school', 'university', 'degree', 'college'],
+      answer: 'He graduated with a Bachelor of Science in Computer Engineering from the University of Batangas.',
+    },
+    {
+      id: 'skills',
+      keywords: ['skills', 'stack', 'tech stack', 'technology', 'tools', 'programming languages', 'backend', 'frontend'],
+      answer: `His skill set includes ${stackSummary}. He works across frontend, backend, cloud, and developer tooling.`,
+    },
+    {
+      id: 'projects',
+      keywords: ['projects', 'portfolio', 'work', 'works', 'what has he built', 'applications'],
+      answer: `Some of his notable projects are ${projectSummary}. The highlights include CodeCred, Gigahertz, Chatime, and the CPE Congress AI & CyberSecurity project.`,
+    },
+    {
+      id: 'certifications',
+      keywords: ['certifications', 'certificate', 'cert', 'credentials', 'awards'],
+      answer: `He has certifications including ${certificationSummary}.`,
+    },
+    {
+      id: 'experience',
+      keywords: ['experience', 'career', 'job', 'resume', 'roles', 'work experience'],
+      answer: `His experience includes ${experienceSummary}. This covers software engineering, DevOps, full-stack development, and academic experience in computer engineering.`,
+    },
+    {
+      id: 'community',
+      keywords: ['organizations', 'community', 'member of', 'society', 'groups'],
+      answer: `He is involved with ${orgSummary}.`,
+    },
+    {
+      id: 'contact',
+      keywords: ['contact', 'email', 'hire', 'available', 'work with him', 'reach out'],
+      answer: 'You can reach him through the email form on this page or directly at macxiaobin0517@gmail.com. He is open to software development, product, and collaboration opportunities.',
+    },
+    {
+      id: 'social',
+      keywords: ['social media', 'linkedin', 'github', 'facebook', 'instagram', 'social links'],
+      answer: `His social links include ${socialSummary}.`,
+    },
+    {
+      id: 'hobbies',
+      keywords: ['hobbies', 'interests', 'outside work', 'lifestyle', 'sports', 'podcast', 'wellness'],
+      answer: 'Outside of work, he enjoys learning new technologies, listening to technology podcasts, taking online certifications.',
+    },
+    {
+      id: 'ai',
+      keywords: ['ai', 'artificial intelligence', 'machine learning', 'ml', 'generative ai'],
+      answer: 'He is especially interested in AI, machine learning, and practical automation. He also works on AI-enhanced workflows, generative AI tooling, and security-focused technology projects.',
+    },
+    {
+      id: 'security',
+      keywords: ['security', 'cybersecurity', 'cyber', 'secure'],
+      answer: 'Security is one of his key interests. He also holds an ISC2 Security Protocol certification and works in AI and cybersecurity related areas.',
+    },
+    {
+      id: 'recommendations',
+      keywords: ['recommendations', 'references', 'testimonials', 'reviews', 'recommendation'],
+      answer: 'He has recommendations from collaborators such as Aironn Jayfe Datinguinoo, Allan Justine Castromero, and Kyle Faral. They highlight his technical ability, creativity, reliability, and collaborative nature.',
+    },
+    {
+      id: 'capabilities',
+      keywords: ['what can you do', 'can you help me', 'what do you know', 'help me'],
+      answer: 'I can answer questions about his background, skills, projects, certifications, experience, communities, social links, and contact details.',
+    },
+    {
+      id: 'thanks',
+      keywords: ['thank you', 'thanks', 'appreciate it'],
+      answer: 'You’re welcome! Ask me about his projects, stack, certifications, or contact details anytime.',
+    },
+  ];
+
+  let bestMatch = {
+    score: 0,
+    answer: 'I can tell you about his software engineering background, tech stack, project work, certifications, education, communities, and contact information. Try asking about his projects, skills, or experience.',
+  };
+
+  for (const intent of intents) {
+    let score = 0;
+    for (const keyword of intent.keywords) {
+      if (text.includes(keyword)) {
+        score += 3;
+      }
+    }
+
+    if ((intent.id === 'projects' || intent.id === 'skills' || intent.id === 'experience' || intent.id === 'certifications') && text.includes('what')) {
+      score += 2;
+    }
+
+    if (text.includes('xiao') && (intent.id === 'identity' || intent.id === 'about' || intent.id === 'location')) {
+      score += 1;
+    }
+
+    if (score > bestMatch.score) {
+      bestMatch = { score, answer: intent.answer };
+    }
+  }
+
+  return bestMatch.answer;
+}
 
 function formatRange(dateStr, timeStr, durationMin) {
   if (!dateStr || !timeStr) {
@@ -62,32 +192,6 @@ function createICS({ name, email, date, time, duration, notes }) {
   URL.revokeObjectURL(url);
 }
 
-function parseSseData(raw) {
-  let accumulated = '';
-  const lines = raw.split(/\r?\n/).filter(Boolean);
-  for (const line of lines) {
-    const trimmed = line.trim();
-    if (!trimmed) continue;
-    if (trimmed.startsWith('data:')) {
-      const payload = trimmed.replace(/^data:\s*/, '');
-      if (payload === '[DONE]') {
-        continue;
-      }
-      try {
-        const parsed = JSON.parse(payload);
-        if (parsed && parsed.chunk) {
-          accumulated += parsed.chunk;
-          continue;
-        }
-      } catch (error) {
-        // ignore parse failures and use raw payload text
-      }
-      accumulated += payload;
-    }
-  }
-  return accumulated;
-}
-
 function loadChatMessages() {
   try {
     if (typeof window === 'undefined') {
@@ -130,9 +234,7 @@ export default function App() {
   const [emailSending, setEmailSending] = useState(false);
   const [chatMessages, setChatMessages] = useState(() => loadChatMessages());
   const [chatInput, setChatInput] = useState('');
-  const [chatSearch, setChatSearch] = useState('');
   const [chatStatusText, setChatStatusText] = useState('');
-  const [presenceOnline, setPresenceOnline] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(0);
   const galleryTrackRef = useRef(null);
   const scheduleFirstInput = useRef(null);
@@ -141,9 +243,9 @@ export default function App() {
 
   const profileImages = useMemo(
     () => ({
-      primary: theme === 'dark' ? '/assets/profile1.png' : '/assets/profile1-lightmode.png',
-      hover: theme === 'dark' ? '/assets/profile2png.png' : '/assets/profile2-lightmode.png',
-      third: theme === 'dark' ? '/assets/profile3-darkmode.png' : '/assets/profile3-lightmode.png',
+      primary: theme === 'dark' ? './assets/profile1.png' : './assets/profile1-lightmode.png',
+      hover: theme === 'dark' ? './assets/profile2png.png' : './assets/profile2-lightmode.png',
+      third: theme === 'dark' ? './assets/profile3-darkmode.png' : './assets/profile3-lightmode.png',
     }),
     [theme]
   );
@@ -181,13 +283,7 @@ export default function App() {
     [scheduleForm]
   );
 
-  const filteredChatMessages = useMemo(() => {
-    if (!chatSearch.trim()) {
-      return chatMessages;
-    }
-    const term = chatSearch.toLowerCase();
-    return chatMessages.filter((message) => message.text.toLowerCase().includes(term));
-  }, [chatMessages, chatSearch]);
+  const filteredChatMessages = chatMessages;
 
   const openScheduleModal = () => {
     setScheduleOpen(true);
@@ -399,42 +495,13 @@ export default function App() {
     ]);
 
     try {
-      const streamUrl = CHAT_API_ENDPOINT.replace('/api/gemini_chat', '/api/gemini_stream');
-      const response = await fetch(streamUrl, {
-        method: 'POST',
-        headers: { Accept: 'text/event-stream', 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text }),
-      });
-
-      if (!response.ok || !response.body) {
-        throw new Error('Streaming API error');
-      }
-
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder();
-      let accumulated = '';
-
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) {
-          break;
-        }
-        const raw = decoder.decode(value, { stream: true });
-        const chunk = parseSseData(raw);
-        if (chunk) {
-          accumulated += chunk;
-          setChatMessages((current) =>
-            current.map((message) =>
-              message.id === botId ? { ...message, text: accumulated } : message
-            )
-          );
-        }
-      }
+      await new Promise((resolve) => window.setTimeout(resolve, 500));
+      const reply = buildLocalChatReply(text);
 
       setChatMessages((current) =>
         current.map((message) => {
           if (message.id === botId) {
-            return { ...message, status: 'sent' };
+            return { ...message, text: reply, status: 'sent' };
           }
           if (message.id === userId) {
             return { ...message, status: 'sent' };
@@ -452,7 +519,7 @@ export default function App() {
           return message;
         })
       );
-      setChatStatusText('Could not send message to the AI backend.');
+      setChatStatusText('Could not send the message. Please try again.');
     }
   };
 
@@ -484,28 +551,6 @@ export default function App() {
     );
     setChatStatusText('Retrying...');
     await sendToGemini(message.text, messageId);
-  };
-
-  const exportChat = () => {
-    const blob = new Blob([JSON.stringify(chatMessages, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const anchor = document.createElement('a');
-    anchor.href = url;
-    anchor.download = 'chat-conversation.json';
-    document.body.appendChild(anchor);
-    anchor.click();
-    anchor.remove();
-    URL.revokeObjectURL(url);
-  };
-
-  const clearChat = () => {
-    if (!window.confirm('Clear the conversation history?')) {
-      return;
-    }
-    setChatMessages([]);
-    window.localStorage.removeItem(CHAT_STORAGE_KEY);
-    setChatStatusText('Conversation cleared.');
-    setTimeout(() => setChatStatusText(''), 2000);
   };
 
   return (
@@ -643,9 +688,7 @@ export default function App() {
                 <p className="text-gray-400 text-sm leading-relaxed mb-4">
                   I listen to Podcasts about Technology, Software Development, and Emerging Tech.
                 </p>
-                <p className="text-gray-400 text-sm leading-relaxed mb-4">
-                  I jog &amp; walk every Monday to Friday; on weekends I play Volleyball. I do this for my mental health and physical health.
-                </p>
+                
               </div>
             </section>
 
@@ -668,7 +711,7 @@ export default function App() {
                   >
                     <h4 className="font-bold text-sm text-white">{project.title}</h4>
                     <p className="text-xs text-gray-400 mb-2">{project.description}</p>
-                    <span className="bg-black text-gray-300 text-[10px] px-2 py-1 rounded border border-gray-800 font-mono">{project.label}</span>
+                    <span className="bg-[var(--soft-panel)] text-gray-300 text-[10px] px-2 py-1 rounded border border-gray-800 font-mono">{project.label}</span>
                   </a>
                 ))}
               </div>
@@ -681,13 +724,16 @@ export default function App() {
                 <i className="fas fa-check-circle text-gray-400" />
                 <h2 className="font-bold text-lg">Recent Certifications</h2>
               </div>
-              <a href="/certifications.html" className="text-xs text-gray-500 hover:text-white transition-colors">
+              <a href="./certifications.html" className="text-xs text-gray-500 hover:text-white transition-colors">
                 View All <i className="fas fa-chevron-right ml-1" />
               </a>
             </div>
             <div className="space-y-3">
               {content.certifications.map((cert) => (
                 <div key={cert.title} className="project-card p-3">
+                  <div className="mb-2 overflow-hidden rounded-md border border-gray-800 bg-[var(--soft-panel)]">
+                    <img src={cert.image} alt={cert.title} className="h-24 w-full object-cover" />
+                  </div>
                   <h4 className="font-bold text-sm">{cert.title}</h4>
                   <p className="text-xs text-gray-400">{cert.subtitle}</p>
                 </div>
@@ -746,10 +792,10 @@ export default function App() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
         <section className="card p-4 flex flex-col justify-between">
-          <div className="flex items-center gap-2 mb-2 text-gray-400 text-sm">
+          <div className="flex items-center gap-2 mb-0 text-gray-400 text-sm">
             <i className="fas fa-users" /> A member of
           </div>
-          <div className="space-y-2">
+          <div className="space-y-0 mt-0">
             {content.organizations.map((item) => (
               <a
                 key={item.label}
@@ -792,9 +838,7 @@ export default function App() {
           <p className="text-medium text-gray-400 mt-2 mb-auto">
             Available for online bootcamps and events about software development and emerging technologies.
           </p>
-          <p className="text-medium text-gray-400 mt-2 mb-auto">
-            Meet me at University of Batangas.
-          </p>
+         
         </section>
 
         <div className="flex flex-col gap-2">
@@ -1033,51 +1077,32 @@ export default function App() {
         </form>
       </Modal>
 
-      <Modal open={chatOpen} onClose={closeChatModal} titleId="chat-modal-title" className="p-0 max-w-sm w-full overflow-hidden">
-        <header className="flex items-center gap-3 px-3 py-2 bg-[#06121a] text-white">
+      <Modal open={chatOpen} onClose={closeChatModal} titleId="chat-modal-title" className="chat-modal-shell p-0 max-w-sm w-full overflow-hidden rounded-[20px] border border-white/10 shadow-2xl">
+        <header className="chat-modal-header flex items-center justify-between gap-3 border-b border-white/10 bg-[var(--chat-shell)] px-3 py-2.5 text-[var(--text)]">
           <div className="flex items-center gap-3">
-            <img src="/assets/profile1.png" alt="Avatar" className="w-9 h-9 rounded-full border" />
-            <div>
-              <div className="font-semibold" id="chat-title">Chat with Xiao</div>
-              <div className="text-xs text-green-400" id="chat-presence">{presenceOnline ? 'Online' : 'Offline'}</div>
+            <img src="./assets/profile1.png" alt="Avatar" className="h-9 w-9 rounded-full border border-white/20 object-cover" />
+            <div className="flex items-center gap-2">
+              <div className="text-sm font-semibold" id="chat-title">Xiao</div>
+              <span className="inline-block h-2.5 w-2.5 rounded-full bg-green-400 shadow-[0_0_8px_rgba(74,222,128,0.9)]" title="Online" aria-label="Online" />
             </div>
           </div>
-          <div className="ml-auto flex items-center gap-2">
-            <button type="button" className="cta-btn" onClick={exportChat} title="Export conversation">
-              Export
-            </button>
-            <button type="button" className="cta-btn" onClick={clearChat} title="Clear conversation">
-              Clear
-            </button>
-            <button type="button" className="cta-btn" onClick={() => setPresenceOnline((value) => !value)} title="Toggle presence">
-              {presenceOnline ? 'Go offline' : 'Go online'}
-            </button>
-            <button type="button" className="ml-1 cta-btn" onClick={closeChatModal} aria-label="Close chat">
-              ✕
-            </button>
-          </div>
+          <button type="button" className="chat-modal-close rounded-full bg-white/5 px-2 py-1 text-xs text-gray-300 hover:bg-white/10" onClick={closeChatModal} aria-label="Close chat">
+            ✕
+          </button>
         </header>
-        <div className="chat-toolbar px-3 py-2 bg-[#06121a]">
-          <input
-            id="chat-search"
-            placeholder="Search messages"
-            value={chatSearch}
-            onChange={(event) => setChatSearch(event.target.value)}
-            className="input-field p-2 rounded border bg-[#071018] text-white w-full"
-          />
-        </div>
-        <div id="chat-thread" className="chat-thread mb-0 overflow-y-auto bg-[#030507]" style={{ maxHeight: '42vh' }}>
+
+        <div id="chat-thread" className="chat-thread overflow-y-auto bg-[var(--bg)]" style={{ maxHeight: '42vh' }}>
           {filteredChatMessages.map((message) => (
-            <div key={message.id} className={`chat-msg ${message.who === 'user' ? 'justify-end' : 'justify-start'} flex py-2 px-3`}>
-              <div className={`rounded-3xl p-4 max-w-[85%] ${message.who === 'user' ? 'bg-white text-black' : 'bg-[#131a22] text-gray-300'}`}>
-                <p className="whitespace-pre-wrap text-sm">{message.text}</p>
-                <div className="mt-3 flex items-center justify-between gap-2 text-[11px] text-gray-400">
+            <div key={message.id} className={`chat-msg flex py-2 px-3 ${message.who === 'user' ? 'justify-end' : 'justify-start'}`}>
+              <div className={`max-w-[82%] rounded-2xl px-3 py-2 ${message.who === 'user' ? 'bg-[#3a7cff] text-white rounded-br-md' : 'chat-bot-bubble bg-[var(--chat-bubble)] text-[var(--chat-bubble-alt)] rounded-bl-md'}`}>
+                <p className="whitespace-pre-wrap text-sm leading-relaxed">{message.text}</p>
+                <div className={`mt-1 flex items-center gap-2 text-[10px] ${message.who === 'user' ? 'justify-end text-blue-100' : 'justify-start text-gray-400'}`}>
                   <span>{renderTime(message.ts)}</span>
                   {message.status === 'pending' && <span>Sending...</span>}
                   {message.status === 'failed' && (
                     <button
                       type="button"
-                      className="text-xs text-red-300 underline"
+                      className="text-[10px] underline text-red-400"
                       onClick={() => retryChatMessage(message.id)}
                     >
                       Retry
@@ -1088,26 +1113,27 @@ export default function App() {
             </div>
           ))}
         </div>
-        <form id="chat-form" className="px-3 py-2 flex items-end gap-2 bg-[#030507]" onSubmit={handleChatSubmit}>
+
+        <form id="chat-form" className="chat-form flex items-center gap-2 border-t border-white/10 bg-[var(--chat-shell)] px-3 py-2.5" onSubmit={handleChatSubmit}>
+          <div className="flex items-center gap-2 text-gray-400">
+            <button type="button" className="chat-emoji-btn flex h-8 w-8 items-center justify-center rounded-full bg-white/5 text-lg hover:bg-white/10" aria-label="Add emoji">😊</button>
+            <button type="button" className="chat-attach-btn flex h-8 w-8 items-center justify-center rounded-full bg-white/5 text-lg hover:bg-white/10" aria-label="Attach file">📎</button>
+          </div>
           <input
             ref={chatInputRef}
             id="chat-input"
             value={chatInput}
             onChange={(event) => setChatInput(event.target.value)}
-            className="input-field flex-1 p-3 rounded border bg-[#07090b] text-white"
-            placeholder="Type a message..."
+            className="chat-input input-field flex-1 rounded-full border border-white/10 bg-[var(--chat-bubble)] px-3 py-2 text-sm text-[var(--text)] placeholder:text-[var(--muted-2)] focus:border-[#3a7cff] focus:outline-none"
+            placeholder="Aa"
             aria-label="Message"
             maxLength={1000}
             required
           />
-          <button type="submit" className="cta-btn chat-send bg-white text-black" aria-label="Send message">
+          <button type="submit" className="flex h-9 w-9 items-center justify-center rounded-full bg-[#3a7cff] text-base text-white shadow-sm transition hover:bg-[#2f6bf0]" aria-label="Send message">
             ➤
           </button>
         </form>
-        <div className="px-3 pb-3 flex items-center justify-between text-xs text-gray-400">
-          <div>Ask me about programming, web dev, or tech!</div>
-          <div id="chat-count">{chatInput.length}/1000</div>
-        </div>
       </Modal>
 
       <footer className="text-center text-gray-500 text-sm pb-10">

@@ -15,13 +15,22 @@
             border-radius: 0.5rem; 
             transition: all 0.2s;
             cursor: pointer; 
+            overflow: hidden;
         }
         .project-card:hover { border-color: #3b82f6; transform: translateY(-2px); }
+        .cert-thumb {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+            background: #111827;
+            border-bottom: 1px solid #1f2937;
+        }
     </style>
 </head>
 <body class="p-8">
     <div class="max-w-5xl mx-auto">
-        <a href="index.html" class="text-gray-400 hover:text-white mb-8 inline-block transition-colors">
+        <a href="./index.html" class="text-gray-400 hover:text-white mb-8 inline-block transition-colors">
             <i class="fas fa-arrow-left mr-2"></i> Back to Portfolio
         </a>
 
@@ -32,114 +41,139 @@
 
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            
-            <div class="project-card p-4" onclick="openModal(this)" data-image="cert2.png">
-                <span class="text-[10px] text-purple-400 font-mono uppercase">Programming</span>
-                <h4 class="font-bold text-sm mt-1">Software Engineering</h4>
-                <p class="text-xs text-gray-400">SanFoundry</p>
-            </div> 
-            
-            
-             <div class="project-card p-4" onclick="openModal(this)" data-image="cert3.png">
-                <span class="text-[10px] text-purple-400 font-mono uppercase">Cybersecurity</span>
-                <h4 class="font-bold text-sm mt-1">Cybersecurity Fundamentals</h4>
-                <p class="text-xs text-gray-400">SanFoundry</p>
-            </div> 
-            
-            
-            <div class="project-card p-4" onclick="openModal(this)" data-image="AI CERT.png">
-                <span class="text-[10px] text-purple-400 font-mono uppercase">Artificial Intelligence</span>
-                <h4 class="font-bold text-sm mt-1">AI Certification</h4>
-                <p class="text-xs text-gray-400">SanFoundry</p>
+            <div class="project-card" onclick="openModal(this)" data-image="./assets/CC5.png">
+                <img src="./assets/CC5.png" alt="ISC2 Security Protocol" class="cert-thumb">
+                <div class="p-4">
+                    <span class="text-[10px] text-blue-400 font-mono uppercase">CyberSecurity</span>
+                    <h4 class="font-bold text-sm mt-1">ISC2 Security Protocol</h4>
+                    <p class="text-xs text-gray-400">ISC2</p>
+                </div>
             </div>
 
-            
-            <div class="project-card p-4" onclick="openModal(this)" data-image="CC5.png">
-                <span class="text-[10px] text-blue-400 font-mono uppercase">CyberSecurity</span>
-                <h4 class="font-bold text-sm mt-1">ISC2 Security Protocol</h4>
-                <p class="text-xs text-gray-400">ISC2</p>
-            </div>
-            
-            <div class="project-card p-4" onclick="openModal(this)" data-image="CC4.png">
-                <span class="text-[10px] text-blue-400 font-mono uppercase">CyberSecurity</span>
-                <h4 class="font-bold text-sm mt-1">ISC2 Network Security</h4>
-                <p class="text-xs text-gray-400">ISC2</p>
+            <div class="project-card" onclick="openModal(this)" data-image="./assets/AIFUNDA.png">
+                <img src="./assets/AIFUNDA.png" alt="AI Fundamentals" class="cert-thumb">
+                <div class="p-4">
+                    <span class="text-[10px] text-purple-400 font-mono uppercase">Artificial Intelligence</span>
+                    <h4 class="font-bold text-sm mt-1">AI Fundamentals</h4>
+                    <p class="text-xs text-gray-400">Google</p>
+                </div>
             </div>
 
-            <div class="project-card p-4" onclick="openModal(this)" data-image="CC3.png">
-                <span class="text-[10px] text-blue-400 font-mono uppercase">CyberSecurity</span>
-                <h4 class="font-bold text-sm mt-1">ISC2 Access Control Concepts</h4>
-                <p class="text-xs text-gray-400">ISC2</p>
-                 
+            <div class="project-card" onclick="openModal(this)" data-image="./assets/CCNAENTERPRISE.png">
+                <img src="./assets/CCNAENTERPRISE.png" alt="CCNA Enterprise Networking" class="cert-thumb">
+                <div class="p-4">
+                    <span class="text-[10px] text-green-400 font-mono uppercase">Networking & CyberSecurity</span>
+                    <h4 class="font-bold text-sm mt-1">CCNA: Enterprise Networking, Security, and Automation</h4>
+                    <p class="text-xs text-gray-400">Cisco Networking Academy</p>
+                </div>
             </div>
 
-            <div class="project-card p-4" onclick="openModal(this)" data-image="CC2.png">
-                <span class="text-[10px] text-blue-400 font-mono uppercase">CyberSecurity</span>
-                <h4 class="font-bold text-sm mt-1">ISC2 Incident Response, Business Continuity & Disaster Recovery</h4>
-                <p class="text-xs text-gray-400">ISC2</p>
-                
-            </div>
-            
-            <div class="project-card p-4" onclick="openModal(this)" data-image="CC1.png">
-                <span class="text-[10px] text-blue-400 font-mono uppercase">CyberSecurity</span>
-                <h4 class="font-bold text-sm mt-1">ISC2 CC Domain 1: Security Principles</h4>
-                <p class="text-xs text-gray-400">ISC2</p>
-                        
+            <div class="project-card" onclick="openModal(this)" data-image="./assets/CCNAINTRO.png">
+                <img src="./assets/CCNAINTRO.png" alt="CCNA Introduction to Networks" class="cert-thumb">
+                <div class="p-4">
+                    <span class="text-[10px] text-green-400 font-mono uppercase">Networking</span>
+                    <h4 class="font-bold text-sm mt-1">CCNA: Introduction to Networks</h4>
+                    <p class="text-xs text-gray-400">Cisco Networking Academy</p>
+                </div>
             </div>
 
-            <div class="project-card p-4" onclick="openModal(this)" data-image="AIFUNDA.png">
-                <span class="text-[10px] text-purple-400 font-mono uppercase">Artificial Intelligence</span>
-                <h4 class="font-bold text-sm mt-1">AI Fundamentals</h4>
-                <p class="text-xs text-gray-400">Google</p>
-                 
-            </div>
-            
-            <div class="project-card p-4" onclick="openModal(this)" data-image="socialENgr.png">
-                <span class="text-[10px] text-blue-400 font-mono uppercase">CyberSecurity</span>
-                <h4 class="font-bold text-sm mt-1">Social Engineering</h4>
-                <p class="text-xs text-gray-400">Cisco Ethical Hacking</p>
+            <div class="project-card" onclick="openModal(this)" data-image="./assets/CCNASWITCHING.png">
+                <img src="./assets/CCNASWITCHING.png" alt="CCNA Switching Routing and Wireless Essentials" class="cert-thumb">
+                <div class="p-4">
+                    <span class="text-[10px] text-green-400 font-mono uppercase">Networking</span>
+                    <h4 class="font-bold text-sm mt-1">CCNA: Switching, Routing, and Wireless Essentials</h4>
+                    <p class="text-xs text-gray-400">Cisco Networking Academy</p>
+                </div>
             </div>
 
-             <div class="project-card p-4" onclick="openModal(this)" data-image="CCNAENTERPRISE.png">
-                <span class="text-[10px] text-green-400 font-mono uppercase">Networking & CyberSecurity</span>
-                <h4 class="font-bold text-sm mt-1">CCNA: Enterprise Networking, Security, and Automation</h4>
-                <p class="text-xs text-gray-400">Cisco Networking Academy</p>
+            <div class="project-card" onclick="openModal(this)" data-image="./assets/IntroCyber.png">
+                <img src="./assets/IntroCyber.png" alt="Introduction to Cybersecurity" class="cert-thumb">
+                <div class="p-4">
+                    <span class="text-[10px] text-blue-400 font-mono uppercase">CyberSecurity</span>
+                    <h4 class="font-bold text-sm mt-1">Introduction to Cybersecurity</h4>
+                    <p class="text-xs text-gray-400">Cisco Networking Academy</p>
+                </div>
             </div>
 
-            <div class="project-card p-4" onclick="openModal(this)" data-image="CCNAINTRO.png">
-                <span class="text-[10px] text-green-400 font-mono uppercase">Networking</span>
-                <h4 class="font-bold text-sm mt-1">CCNA: Introduction to Networks</h4>
-                <p class="text-xs text-gray-400">Cisco Networking Academy</p>
+            <div class="project-card" onclick="openModal(this)" data-image="./assets/AI CERT.png">
+                <img src="./assets/AI CERT.png" alt="AI Certification" class="cert-thumb">
+                <div class="p-4">
+                    <span class="text-[10px] text-purple-400 font-mono uppercase">Artificial Intelligence</span>
+                    <h4 class="font-bold text-sm mt-1">AI Certification</h4>
+                    <p class="text-xs text-gray-400">SanFoundry</p>
+                </div>
             </div>
 
-            <div class="project-card p-4" onclick="openModal(this)" data-image="CCNASWITCHING.png">
-                <span class="text-[10px] text-green-400 font-mono uppercase">Networking</span>
-                <h4 class="font-bold text-sm mt-1">CCNA: Switching, Routing, and Wireless Essentials</h4>
-                <p class="text-xs text-gray-400">Cisco Networking Academy</p>
-            </div>
-             
-            <div class="project-card p-4" onclick="openModal(this)" data-image="HTML.png">
-                <span class="text-[10px] text-yellow-400 font-mono uppercase">Programming</span>
-                <h4 class="font-bold text-sm mt-1">HTML Fundamentals</h4>
-                <p class="text-xs text-gray-400">CodeCred</p>
+            <div class="project-card" onclick="openModal(this)" data-image="./assets/HTML.png">
+                <img src="./assets/HTML.png" alt="HTML Fundamentals" class="cert-thumb">
+                <div class="p-4">
+                    <span class="text-[10px] text-yellow-400 font-mono uppercase">Programming</span>
+                    <h4 class="font-bold text-sm mt-1">HTML Fundamentals</h4>
+                    <p class="text-xs text-gray-400">CodeCred</p>
+                </div>
             </div>
 
-            <div class="project-card p-4" onclick="openModal(this)" data-image="python.png">
-                <span class="text-[10px] text-yellow-400 font-mono uppercase">Programming</span>
-                <h4 class="font-bold text-sm mt-1">Python Essentials</h4>
-                <p class="text-xs text-gray-400">Cisco Networking Academy</p>
+            <div class="project-card" onclick="openModal(this)" data-image="./assets/python.png">
+                <img src="./assets/python.png" alt="Python Essentials" class="cert-thumb">
+                <div class="p-4">
+                    <span class="text-[10px] text-yellow-400 font-mono uppercase">Programming</span>
+                    <h4 class="font-bold text-sm mt-1">Python Essentials</h4>
+                    <p class="text-xs text-gray-400">Cisco Networking Academy</p>
+                </div>
             </div>
 
-            <div class="project-card p-4" onclick="openModal(this)" data-image="introIOT.png">
-                <span class="text-[10px] text-yellow-400 font-mono uppercase">Programming</span>
-                <h4 class="font-bold text-sm mt-1">IoT & Digital Transformation</h4>
-                <p class="text-xs text-gray-400">Cisco Networking Academy</p>
+            <div class="project-card" onclick="openModal(this)" data-image="./assets/introIOT.png">
+                <img src="./assets/introIOT.png" alt="IoT and Digital Transformation" class="cert-thumb">
+                <div class="p-4">
+                    <span class="text-[10px] text-yellow-400 font-mono uppercase">Programming</span>
+                    <h4 class="font-bold text-sm mt-1">IoT & Digital Transformation</h4>
+                    <p class="text-xs text-gray-400">Cisco Networking Academy</p>
+                </div>
             </div>
 
-             <div class="project-card p-4" onclick="openModal(this)" data-image="IntroCyber.png">
-                <span class="text-[10px] text-blue-400 font-mono uppercase">CyberSecurity</span>
-                <h4 class="font-bold text-sm mt-1">Introduction to Cybersecurity</h4>
-                <p class="text-xs text-gray-400">Cisco Networking Academy</p>
+            <div class="project-card" onclick="openModal(this)" data-image="./assets/socialENgr.png">
+                <img src="./assets/socialENgr.png" alt="Social Engineering" class="cert-thumb">
+                <div class="p-4">
+                    <span class="text-[10px] text-blue-400 font-mono uppercase">CyberSecurity</span>
+                    <h4 class="font-bold text-sm mt-1">Social Engineering</h4>
+                    <p class="text-xs text-gray-400">Cisco Ethical Hacking</p>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="openModal(this)" data-image="./assets/CC1.png">
+                <img src="./assets/CC1.png" alt="ISC2 CC Domain 1" class="cert-thumb">
+                <div class="p-4">
+                    <span class="text-[10px] text-blue-400 font-mono uppercase">CyberSecurity</span>
+                    <h4 class="font-bold text-sm mt-1">ISC2 CC Domain 1: Security Principles</h4>
+                    <p class="text-xs text-gray-400">ISC2</p>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="openModal(this)" data-image="./assets/CC2.png">
+                <img src="./assets/CC2.png" alt="ISC2 Incident Response" class="cert-thumb">
+                <div class="p-4">
+                    <span class="text-[10px] text-blue-400 font-mono uppercase">CyberSecurity</span>
+                    <h4 class="font-bold text-sm mt-1">ISC2 Incident Response, Business Continuity & Disaster Recovery</h4>
+                    <p class="text-xs text-gray-400">ISC2</p>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="openModal(this)" data-image="./assets/CC3.png">
+                <img src="./assets/CC3.png" alt="ISC2 Access Control Concepts" class="cert-thumb">
+                <div class="p-4">
+                    <span class="text-[10px] text-blue-400 font-mono uppercase">CyberSecurity</span>
+                    <h4 class="font-bold text-sm mt-1">ISC2 Access Control Concepts</h4>
+                    <p class="text-xs text-gray-400">ISC2</p>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="openModal(this)" data-image="./assets/CC4.png">
+                <img src="./assets/CC4.png" alt="ISC2 Network Security" class="cert-thumb">
+                <div class="p-4">
+                    <span class="text-[10px] text-blue-400 font-mono uppercase">CyberSecurity</span>
+                    <h4 class="font-bold text-sm mt-1">ISC2 Network Security</h4>
+                    <p class="text-xs text-gray-400">ISC2</p>
+                </div>
             </div>
         </div>
     </div>

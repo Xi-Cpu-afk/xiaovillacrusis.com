@@ -42,17 +42,17 @@ const content = {
     {
       title: 'ISC2 Security Protocol',
       subtitle: 'ISC2 CyberSecurity',
-      image: './assets/CC5.png',
+      image: './assets/CC1.png',
     },
     {
       title: 'AI Fundamentals',
       subtitle: 'Google AI Roadmap',
-      image: './assets/AIFUNDA.png',
+      image: './assets/AI CERT.png',
     },
     {
       title: 'CCNA: Enterprise Networking',
       subtitle: 'Networking Academy',
-      image: './assets/CCNAENTERPRISE.png',
+      image: './assets/CCNAINTRO.png',
     },
   ],
   experiences: [
@@ -68,12 +68,12 @@ const content = {
       role: 'Full-Stack Web Developer, BPI',
     },
     {
-      text: 'Kuya Xiao is a reliable senior with great expertise on software design and AI. This can be proven with plenty of projects he had done in the past presented at this very web page. He is a charming young man who is easy to approach with a passion for all things code related, and overall summarized with the word "chill" in the informal tone. Ever so persistent even at the face of trouble, he will make sure that his projects are executed with utmost finesse.',
+      text: 'Kuya Xiao is a reliable senior with great expertise on software design and AI. This can be proven with plenty of projects he had done in the past presented at this very web page. He i[...]
       author: 'Allan Justine Castromero',
       role: '4th Year Computer Engineering Student',
     },
     {
-      text: 'He is a coding enthusiast with a high level of expertise, whose work reflects both technical skill and creativity. From the moment we met, he is also social, approachable, and deeply dedicated.',
+      text: 'He is a coding enthusiast with a high level of expertise, whose work reflects both technical skill and creativity. From the moment we met, he is also social, approachable, and deeply [...]
       author: 'Kyle Faral',
       role: '3rd Year Computer Engineering Student',
     },
